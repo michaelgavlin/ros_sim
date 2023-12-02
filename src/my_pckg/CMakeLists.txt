@@ -122,6 +122,10 @@ target_link_libraries(hello_world ${catkin_LIBRARIES})
 add_executable(cntrl_publisher_node src/cntrl_publisher.cpp)
 target_link_libraries(cntrl_publisher_node ${catkin_LIBRARIES})
 
+add_executable(imu_subscriber_node src/imu_subscriber.cpp)
+target_link_libraries(imu_subscriber_node ${catkin_LIBRARIES})
+
+
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
 #   src/${PROJECT_NAME}/my_pckg.cpp

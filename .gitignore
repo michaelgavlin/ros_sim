@@ -1,2 +1,5 @@
+# Ignore everything
+*
+
 !.gitignore
-!./src/
+!/home/michael/catkin_ws/src
