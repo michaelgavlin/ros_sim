@@ -1,11 +1,14 @@
 #include "ros/ros.h"
 #include <nav_msgs/Odometry.h>
 #include <geometry_msgs/Twist.h>
+#include "my_pckg/PoseSimple.h"
+
 #include <tf/tf.h>
 #include <cmath>
 
 // Global publisher
 ros::Publisher vel_pub;
+ros::Publisher pub;
 
 // Target position
 const double target_x = 2.0;
@@ -85,15 +88,25 @@ void odomCallback(const nav_msgs::Odometry::ConstPtr& msg) {
     ROS_INFO("Angle to Target: %f", angle_to_target_value);
     ROS_INFO("Required Angular Change: %f", angular_change);
 
-    publish_movement(distance_to_target,angular_change);
+    my_pckg::PoseSimple msg_;
+    msg_.linear_x = distance_to_target;
+    msg_.angular_z = angular_change;
+    pub.publish(msg_);
+
+    // publish_movement(distance_to_target,angular_change);
 
 }
 
 int main(int argc, char **argv) {
     ros::init(argc, argv, "odom_subscriber");
     ros::NodeHandle n;
-
+    
     vel_pub = n.advertise<geometry_msgs::Twist>("/cmd_vel", 10);
+
+    // pub = n.advertise<geometry_msgs::Twist>("/controller", 10); 
+    pub = n.advertise<my_pckg::PoseSimple>("/controller", 10);
+
+
     ros::Subscriber sub = n.subscribe("/odom", 1000, odomCallback);
 
     ros::spin();
