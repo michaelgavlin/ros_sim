@@ -2,4 +2,4 @@
 *
 
 !.gitignore
-!/home/michael/catkin_ws/src
+!/home/michael/catkin_ws/src/my_pckg
