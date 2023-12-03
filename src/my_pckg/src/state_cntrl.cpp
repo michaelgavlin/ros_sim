@@ -16,7 +16,7 @@ double distance_to_target;
 void publish_movement(double distance, double angular_change) {
     const double max_linear_speed = 0.2; // Maximum linear speed
     const double linear_threshold = 0.05; // Threshold to stop linear movement
-    const double angular_threshold = 0.1; // Threshold to stop rotation
+    const double angular_threshold = 0.05; // Threshold to stop rotation
 
     geometry_msgs::Twist movement_msg;
 
@@ -37,6 +37,9 @@ void publish_movement(double distance, double angular_change) {
     } else {
         movement_msg.angular.z = 0; // Stop rotation
     }
+
+    ROS_INFO("Publish to robot: angular [%f] , linear [%f]", 
+    movement_msg.angular.z, movement_msg.linear.x);
 
     vel_pub.publish(movement_msg);
 }
@@ -75,6 +78,7 @@ void odomCallback(const nav_msgs::Odometry::ConstPtr& msg) {
     // Calculate the required angular change
     double angular_change = atan2(sin(angle_to_target_value - yaw), cos(angle_to_target_value - yaw));
 
+    ROS_INFO("--- msg --- ");
     ROS_INFO("Distance to target: %f", distance_to_target);
     ROS_INFO("Pose: [Position: x: %f, y: %f]", current_x, current_y);
     ROS_INFO("Robot Orientation (Yaw): %f", yaw);
