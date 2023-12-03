@@ -120,18 +120,11 @@ include
 ${catkin_INCLUDE_DIRS}
 )
 
-add_executable(cntrl_publisher_node src/cntrl_publisher.cpp)
-target_link_libraries(cntrl_publisher_node ${catkin_LIBRARIES})
+add_executable(state_status_node src/state_status.cpp)
+target_link_libraries(state_status_node ${catkin_LIBRARIES})
 
-add_executable(imu_subscriber_node src/imu_subscriber.cpp)
-target_link_libraries(imu_subscriber_node ${catkin_LIBRARIES})
-
-add_executable(odom_subscriber_node src/odom_subscriber.cpp)
-target_link_libraries(odom_subscriber_node ${catkin_LIBRARIES})
-
-add_executable(state_cntrl_node src/state_cntrl.cpp)
-target_link_libraries(state_cntrl_node ${catkin_LIBRARIES})
-
+add_executable(state_control_node src/state_control.cpp)
+target_link_libraries(state_control_node ${catkin_LIBRARIES})
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
