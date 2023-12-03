@@ -129,6 +129,9 @@ target_link_libraries(imu_subscriber_node ${catkin_LIBRARIES})
 add_executable(odom_subscriber_node src/odom_subscriber.cpp)
 target_link_libraries(odom_subscriber_node ${catkin_LIBRARIES})
 
+add_executable(state_cntrl_node src/state_cntrl.cpp)
+target_link_libraries(state_cntrl_node ${catkin_LIBRARIES})
+
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
