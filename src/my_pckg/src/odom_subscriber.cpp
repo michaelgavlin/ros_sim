@@ -3,6 +3,7 @@
 #include "std_msgs/String.h"
 #include "sensor_msgs/Imu.h"
 #include <nav_msgs/Odometry.h>
+#include "my_pckg/PoseSimple.h" 
 
 // nav_msgs/Odometry
 // void chatterCallback(const sensor_msgs::Imu::ConstPtr& msg){
