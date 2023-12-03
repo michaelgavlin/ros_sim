@@ -1,8 +1,9 @@
+# Ignore everything
 *
-!*/
-!/home/
-!/home/michael/
-!/home/michael/catkin_ws/
-!/home/michael/catkin_ws/src/
-!/home/michael/catkin_ws/src/my_pckg/
-!/home/michael/catkin_ws/src/my_pckg/*
+
+# But include the my_pckg directory
+!/src/
+!/src/my_pckg/
+
+# And include everything under my_pckg
+!/src/my_pckg/**
