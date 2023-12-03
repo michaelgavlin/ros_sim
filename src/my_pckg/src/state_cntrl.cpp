@@ -1,13 +1,30 @@
 #include "ros/ros.h"
 #include <nav_msgs/Odometry.h>
+#include <geometry_msgs/Twist.h>
 #include <tf/tf.h>
 #include <cmath>
+
+// Global publisher
+ros::Publisher vel_pub;
 
 // Target position
 const double target_x = 10.0;
 const double target_y = 0.0;
 double angle_to_target_value;
 double distance_to_target;
+
+// Function to publish velocity commands
+void publish_velocity(double angular_change) {
+    geometry_msgs::Twist vel_msg;
+    if (fabs(angular_change) > 0.1) { // Threshold to stop rotation
+        vel_msg.angular.z = 0.5 * angular_change; // Proportional control
+    } else {
+        vel_msg.angular.z = 0; // Stop rotation
+    }
+
+    vel_pub.publish(vel_msg);
+}
+
 
 double calculate_angle_to_target(double target_x, double target_y, double current_x, double current_y) {
     // Angle of the vector between current and dest
@@ -47,12 +64,16 @@ void odomCallback(const nav_msgs::Odometry::ConstPtr& msg) {
     ROS_INFO("Robot Orientation (Yaw): %f", yaw);
     ROS_INFO("Angle to Target: %f", angle_to_target_value);
     ROS_INFO("Required Angular Change: %f", angular_change);
+
+    publish_velocity(angular_change);
+
 }
 
 int main(int argc, char **argv) {
     ros::init(argc, argv, "odom_subscriber");
     ros::NodeHandle n;
 
+    vel_pub = n.advertise<geometry_msgs::Twist>("/cmd_vel", 10);
     ros::Subscriber sub = n.subscribe("/odom", 1000, odomCallback);
 
     ros::spin();
