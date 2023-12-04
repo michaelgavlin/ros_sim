@@ -14,23 +14,27 @@ ros::Publisher vel_pub; // Global publisher for sending movement commands.
  * param angular_change: The desired change in orientation. This is used to control rotational motion.
  */
 void publish_movement(double distance, double angular_change) {
-    const double max_linear_speed = 0.35; // Maximum linear speed.
+    const double max_linear_speed = 0.25; // Maximum linear speed.
     const double linear_threshold = 0.05; // Threshold below which linear movement is stopped.
-    const double angular_threshold = 0.1; // Threshold below which rotational movement is stopped.
+    const double angular_threshold = 0.05; // Threshold below which rotational movement is stopped.
+
+    // Manual tweak parameters
+    const double linear_speed_scaling_factor = 0.01; // Scale the proportional linear speed
+    const double angular_speed_scaling_factor = 1; // Scale the proportional angular speed
 
     geometry_msgs::Twist movement_msg;
 
-    // Linear movement control.
-    double linear_speed = std::min(distance, max_linear_speed); // Clamp the linear speed to max speed.
-
+    // Linear movement control with proportional speed and manual tweak
+    double linear_speed;
     if (fabs(distance) > linear_threshold) {
-        movement_msg.linear.x = linear_speed; // Set linear speed for movement.
+        linear_speed = std::min(max_linear_speed * (fabs(distance) / linear_threshold) * linear_speed_scaling_factor, max_linear_speed);
+        movement_msg.linear.x = distance > 0 ? linear_speed : -linear_speed; // Ensure correct direction
     } else {
         movement_msg.linear.x = 0; // Stop linear movement.
     }
 
-    // Angular movement control.
-    double angular_speed = angular_change * 3; // Proportional control for angular speed.
+    // Angular movement control with manual tweak
+    double angular_speed = angular_change * angular_speed_scaling_factor; // Proportional control for angular speed with scaling.
     if (fabs(angular_change) > angular_threshold) {
         movement_msg.angular.z = angular_speed; // Set angular speed for rotation.
     } else {

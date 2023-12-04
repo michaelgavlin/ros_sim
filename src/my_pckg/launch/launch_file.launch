@@ -1,12 +1,19 @@
 <launch>
+    <rosparam param="/rosout_disable_topics_generation">true</rosparam>
 
     <node name="gps_handler_node" pkg="my_pckg" type="gps_handler_node" output="screen">
+        <param name="log_level" value="error"/>
     </node>
 
     <node name="state_control_node" pkg="my_pckg" type="state_control_node" output="screen">
+        <param name="log_level" value="error"/>
     </node>
 
     <node name="state_status_node" pkg="my_pckg" type="state_status_node" output="screen">
+        <param name="log_level" value="error"/>
     </node>
 
+    <node name="location_scaler" pkg="my_pckg" type="location_scaler" output="screen">
+        <param name="log_level" value="error"/>
+    </node>
 </launch>

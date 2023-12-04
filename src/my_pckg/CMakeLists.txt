@@ -55,3 +55,6 @@ target_link_libraries(gps_handler_node ${catkin_LIBRARIES} ${GeographicLib_LIBRA
 
 add_executable(user_interface_node src/user_interface.cpp)
 target_link_libraries(user_interface_node ${catkin_LIBRARIES} ${GeographicLib_LIBRARIES})
+
+add_executable(location_scaler_node src/location_scaler.cpp)
+target_link_libraries(location_scaler_node ${catkin_LIBRARIES})

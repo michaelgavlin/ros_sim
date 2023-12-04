@@ -104,7 +104,8 @@ int main(int argc, char **argv) {
 
     pub = n.advertise<my_pckg::PoseSimple>("/target_destination", 10); //publisher to move the robot to x,y location
     pub_sim_gui = n.advertise<sensor_msgs::NavSatFix>("/robot_location", 10);
-    ros::Subscriber sub = n.subscribe("/odom", 1000, odomCallback);
+    // ros::Subscriber sub = n.subscribe("/odom", 1000, odomCallback);
+    ros::Subscriber sub = n.subscribe("/odom_scaled", 1000, odomCallback);
     ros::Subscriber user_sub = n.subscribe("/target_location", 1000, userCallback);
 
     ros::spin();

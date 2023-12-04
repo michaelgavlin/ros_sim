@@ -89,7 +89,8 @@ int main(int argc, char **argv) {
     target_y = 1.0;
      
     pub = n.advertise<my_pckg::PoseSimple>("/controller", 10);
-    ros::Subscriber sub = n.subscribe("/odom", 1000, odomCallback);
+    // ros::Subscriber sub = n.subscribe("/odom", 1000, odomCallback);
+    ros::Subscriber sub = n.subscribe("/odom_scaled", 1000, odomCallback);
     ros::Subscriber user_subscriber = n.subscribe("/target_destination", 1000, userInputCallback);
 
     ros::spin(); // Keep the node running and listening for callbacks.
