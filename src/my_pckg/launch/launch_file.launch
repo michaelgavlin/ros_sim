@@ -1,0 +1,12 @@
+<launch>
+
+    <node name="gps_handler_node" pkg="my_pckg" type="gps_handler_node" output="screen">
+    </node>
+
+    <node name="state_control_node" pkg="my_pckg" type="state_control_node" output="screen">
+    </node>
+
+    <node name="state_status_node" pkg="my_pckg" type="state_status_node" output="screen">
+    </node>
+
+</launch>
