@@ -81,7 +81,7 @@ void userInputCallback(const my_pckg::PoseSimple& msg) {
  * Main function to initialize the ROS node and set up the publisher and subscriber.
  */
 int main(int argc, char **argv) {
-    ros::init(argc, argv, "odom_subscriber");
+    ros::init(argc, argv, "state_status_node");
     ros::NodeHandle n;
 
     // Initialize target position with default values (optional)
