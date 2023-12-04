@@ -3,7 +3,7 @@
 #include "ros/ros.h"
 #include <nav_msgs/Odometry.h>
 #include <geometry_msgs/Twist.h>
-#include "my_pckg/PoseSimple.h"  // Include the custom message header for PoseSimple.
+#include "my_pckg/PoseSimple.h"  // Include my custom message header.
 
 ros::Publisher vel_pub; // Global publisher for sending movement commands.
 

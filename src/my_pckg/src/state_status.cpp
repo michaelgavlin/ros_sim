@@ -1,10 +1,10 @@
-#include "ros/ros.h"
-#include <nav_msgs/Odometry.h>
-#include <geometry_msgs/Twist.h>
-#include "my_pckg/PoseSimple.h"
-
 #include <tf/tf.h>
 #include <cmath>
+#include "ros/ros.h"
+#include <nav_msgs/Odometry.h>
+#include "my_pckg/PoseSimple.h"
+#include <geometry_msgs/Twist.h>
+
 
 // Global publisher for sending calculated pose information.
 ros::Publisher pub;
@@ -17,29 +17,13 @@ const double target_y = 1.0;
 double angle_to_target_value;
 double distance_to_target;
 
-/**
- * Calculate the angle to the target location from the current position.
- * 
- * param target_x X-coordinate of the target location.
- * param target_y Y-coordinate of the target location.
- * param current_x X-coordinate of the current location.
- * param current_y Y-coordinate of the current location.
- * return Angle in radians to the target location from the current position.
- */
+// Calculate the angle to the target location from the current position.
 double calculate_angle_to_target(double target_x, double target_y, double current_x, double current_y) {
     double angle = atan2(target_y - current_y, target_x - current_x);
     return angle;
 }
 
-/**
- * Calculate the distance to the target location from the current position.
- * 
- * param target_x X-coordinate of the target location.
- * param target_y Y-coordinate of the target location.
- * param current_x X-coordinate of the current location.
- * param current_y Y-coordinate of the current location.
- * @eturn Euclidean distance to the target location from the current position.
- */
+// Calculate the distance to the target location from the current position.
 double dist_to_target(double target_x, double target_y, double current_x, double current_y) {
     double distance = sqrt(pow(target_x - current_x, 2) + pow(target_y - current_y, 2));
     return distance;
