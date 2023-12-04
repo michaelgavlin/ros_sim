@@ -45,15 +45,14 @@ To use my customized robot copy the following files, adjust the env paths based 
 
 You can use the out of the box robot without the special appearance.
 
-- Copy xacro and files to your ros directory:
+Copy xacro and files to your ros directory:
 
-```jsx
-	sudo cp meshes/turtlebot3_burger_michael.urdf.xacro /opt/ros/noetic/share/turtlebot3_description/urdf
-	sudo cp meshes/turtlebot3_burger_michael.gazebo.xacro /opt/ros/noetic/share/turtlebot3_description/ur
-```
+- `sudo cp meshes/turtlebot3_burger_michael.urdf.xacro /opt/ros/noetic/share/turtlebot3_description/urdf`
+- `sudo cp meshes/turtlebot3_burger_michael.gazebo.xacro /opt/ros/noetic/share/turtlebot3_description/urdf`
 
-- Copy launch file 
-`cp meshes/turtlebot3_empty_world_michael.launch ~/catkin_ws/src/turtlebot3_simulations/turtlebot3_gazebo/launch`
+Copy launch file 
+
+- `cp meshes/turtlebot3_empty_world_michael.launch ~/catkin_ws/src/turtlebot3_simulations/turtlebot3_gazebo/launch`
 
 ## 2. Launch
 
