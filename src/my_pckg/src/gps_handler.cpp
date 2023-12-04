@@ -19,7 +19,6 @@ public:
         // Set the origin (reference point)
         originLatitude = 32.072734;
         originLongitude = 34.787465;
-
         // Convert origin to UTM
         GeographicLib::UTMUPS::Forward(originLatitude, originLongitude, zone, northp, originX, originY);
     }
@@ -28,7 +27,6 @@ public:
     void cartesianToLatLong(double x, double y, double& latitude, double& longitude) {
         x += originX;
         y += originY;
-
         // Convert back from UTM coordinates to latitude and longitude
         GeographicLib::UTMUPS::Reverse(zone, northp, x, y, latitude, longitude);
     }
@@ -37,10 +35,8 @@ public:
     void destination_in_cartesian_calc(double& x, double& y) {
         int zone;
         bool northp;
-
         // Convert the received geolocation to UTM coordinates
         GeographicLib::UTMUPS::Forward(latitude, longitude, zone, northp, x, y);
-
         // Translate based on the origin
         x -= originX;
         y -= originY;
@@ -70,16 +66,16 @@ void odomCallback(const nav_msgs::Odometry::ConstPtr& msg) {
     converter.destination_in_cartesian_calc(destination_x, destination_y);
     ROS_INFO("Converted Cartesian coordinates target: [ x: %f, y: %f]", destination_x, destination_y);
 
+    // Convert current Cartesian coordinates to latitude and longitude
+    double current_latitude, current_longitude;
+    converter.cartesianToLatLong(current_x, current_y, current_latitude, current_longitude);
+    ROS_INFO("Current GPS location: [lat: %f, long: %f]", current_latitude, current_longitude);
+
     // publish requested coordination in cartesian 
     my_pckg::PoseSimple requested_coordination_msg;
     requested_coordination_msg.linear_x = destination_x;
     requested_coordination_msg.linear_y = destination_y;
     pub.publish(requested_coordination_msg);
-
-    // Convert current Cartesian coordinates to latitude and longitude
-    double current_latitude, current_longitude;
-    converter.cartesianToLatLong(current_x, current_y, current_latitude, current_longitude);
-    ROS_INFO("Current GPS location: [lat: %f, long: %f]", current_latitude, current_longitude);
 
     // publish current location to simGUI
     sensor_msgs::NavSatFix msg_to_gui;
