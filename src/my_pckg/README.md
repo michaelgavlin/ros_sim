@@ -56,14 +56,16 @@ Copy launch file
 
 ## 2. Launch
 
-- Gazebo enviroment with my robot:
+- Run Gazebo enviroment:
+
+ with my robot:
 
 `roslaunch turtlebot3_gazebo turtlebot3_empty_world_michael.launch`
 
-- Gazebo enviroment with basic robot:
+Gazebo enviroment with basic robot:
 
 `roslaunch turtlebot3_gazebo turtlebot3_empty_world_michael.launch`
 
-- Launch all nodes in `my_pckg`
-
-Note: user_interface_node is optional if using the provided GUI and is mainly for debgging.
+- Launch `roslaunch my_pckg launch_file.launch`
+- run user inteface node (optional, for debgging). `rosrun my_pckg user_interface_node`
+- Run provided Python GUI.
