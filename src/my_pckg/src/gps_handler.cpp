@@ -4,6 +4,8 @@
 #include <nav_msgs/Odometry.h>
 #include <GeographicLib/UTMUPS.hpp>
 #include <sensor_msgs/NavSatFix.h>
+#include "geographic_msgs/GeoPoint.h"
+
 
 // Global publisher for sending calculated pose information.
 ros::Publisher pub;
@@ -84,15 +86,24 @@ void odomCallback(const nav_msgs::Odometry::ConstPtr& msg) {
     pub_sim_gui.publish(msg_to_gui);
 }
 
+
+// Callback for handling user input of target location
+void userCallback(const geographic_msgs::GeoPoint::ConstPtr& msg) {
+    latitude = msg->latitude;    // Correctly access latitude
+    longitude = msg->longitude;  // Correctly access longitude
+    ROS_INFO("Received GPS destination: [lat: %f, long: %f]", latitude, longitude);
+
+
+}
+
 int main(int argc, char **argv) {
     ros::init(argc, argv, "gps_handler_node");
     ros::NodeHandle n;
 
     pub = n.advertise<my_pckg::PoseSimple>("/target_destination", 10); //publisher to move the robot to x,y location
     pub_sim_gui = n.advertise<sensor_msgs::NavSatFix>("/robot_location", 10);
-
-    // main loopn
     ros::Subscriber sub = n.subscribe("/odom", 1000, odomCallback);
+    ros::Subscriber user_sub = n.subscribe("/target_location", 1000, userCallback);
 
     ros::spin();
 
