@@ -13,7 +13,7 @@
         <param name="log_level" value="error"/>
     </node>
 
-    <node name="location_scaler" pkg="my_pckg" type="location_scaler" output="screen">
+    <node name="location_scaler_node" pkg="my_pckg" type="location_scaler_node" output="screen">
         <param name="log_level" value="error"/>
     </node>
 </launch>
