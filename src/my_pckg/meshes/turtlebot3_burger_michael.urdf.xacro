@@ -165,7 +165,7 @@
 
   <link name="head_link">
     <visual>
-      <origin xyz="0.02 -0.15 0" rpy="0 0 1.57"/> <!-- Adjust xyz and rpy as needed -->
+      <origin xyz="0.02 -0.05 0.2" rpy="0 0 1.57"/> <!-- Adjust xyz and rpy as needed -->
       <geometry>
         <mesh filename="package://my_pckg/meshes/ZombieHunterHead_v4_90k.stl" scale="0.001 0.001 0.001"/>
       </geometry>
@@ -175,7 +175,7 @@
   <joint name="head_joint" type="fixed">
     <parent link="base_link"/> <!-- Assuming you are attaching to base_link -->
     <child link="head_link"/>
-    <origin xyz="0.02 -0.15 0" rpy="0 0 1.57"/> <!-- Same as in head_link origin -->
+    <origin xyz="0 0 0" rpy="0 0 0"/> <!-- Same as in head_link origin -->
   </joint>
 
 
