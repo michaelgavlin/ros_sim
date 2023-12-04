@@ -52,3 +52,6 @@ target_link_libraries(state_control_node ${catkin_LIBRARIES})
 
 add_executable(gps_handler_node src/gps_handler.cpp)
 target_link_libraries(gps_handler_node ${catkin_LIBRARIES} ${GeographicLib_LIBRARIES})
+
+add_executable(user_interface_node src/user_interface.cpp)
+target_link_libraries(user_interface_node ${catkin_LIBRARIES} ${GeographicLib_LIBRARIES})
