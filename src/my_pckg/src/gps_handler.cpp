@@ -51,11 +51,10 @@ private:
 };
 
 
-
 void odomCallback(const nav_msgs::Odometry::ConstPtr& msg) {
-    ROS_INFO("--- msg --- ");
+    ROS_INFO("--- msg --- "); 
 
-    // init converter object
+    // GeoToCartesianConverter converter;
     GeoToCartesianConverter converter;
 
     // read msg from /odom topic with the current location relative to origin Sarona.
@@ -63,21 +62,10 @@ void odomCallback(const nav_msgs::Odometry::ConstPtr& msg) {
     double current_y = msg->pose.pose.position.y;
     ROS_INFO("Current Position: [x: %f, y: %f]", current_x, current_y);
 
-    // Calculate destination coordination in relative to origin Sarona.
-    double destination_x, destination_y;
-    converter.destination_in_cartesian_calc(destination_x, destination_y);
-    ROS_INFO("Converted Cartesian coordinates target: [ x: %f, y: %f]", destination_x, destination_y);
-
     // Convert current Cartesian coordinates to latitude and longitude
     double current_latitude, current_longitude;
     converter.cartesianToLatLong(current_x, current_y, current_latitude, current_longitude);
     ROS_INFO("Current GPS location: [lat: %f, long: %f]", current_latitude, current_longitude);
-
-    // publish requested coordination in cartesian 
-    my_pckg::PoseSimple requested_coordination_msg;
-    requested_coordination_msg.linear_x = destination_x;
-    requested_coordination_msg.linear_y = destination_y;
-    pub.publish(requested_coordination_msg);
 
     // publish current location to simGUI
     sensor_msgs::NavSatFix msg_to_gui;
@@ -89,10 +77,24 @@ void odomCallback(const nav_msgs::Odometry::ConstPtr& msg) {
 
 // Callback for handling user input of target location
 void userCallback(const geographic_msgs::GeoPoint::ConstPtr& msg) {
+
+    // GeoToCartesianConverter converter;
+    GeoToCartesianConverter converter;
+
     latitude = msg->latitude;    // Correctly access latitude
     longitude = msg->longitude;  // Correctly access longitude
     ROS_INFO("Received GPS destination: [lat: %f, long: %f]", latitude, longitude);
 
+    // Calculate destination coordination in relative to origin Sarona.
+    double destination_x, destination_y;
+    converter.destination_in_cartesian_calc(destination_x, destination_y);
+    ROS_INFO("Converted Cartesian coordinates target: [ x: %f, y: %f]", destination_x, destination_y);
+
+    // publish requested coordination in cartesian 
+    my_pckg::PoseSimple requested_coordination_msg;
+    requested_coordination_msg.linear_x = destination_x;
+    requested_coordination_msg.linear_y = destination_y;
+    pub.publish(requested_coordination_msg);
 
 }
 

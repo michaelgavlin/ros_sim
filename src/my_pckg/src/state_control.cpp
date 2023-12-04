@@ -14,9 +14,9 @@ ros::Publisher vel_pub; // Global publisher for sending movement commands.
  * param angular_change: The desired change in orientation. This is used to control rotational motion.
  */
 void publish_movement(double distance, double angular_change) {
-    const double max_linear_speed = 0.4; // Maximum linear speed.
+    const double max_linear_speed = 0.35; // Maximum linear speed.
     const double linear_threshold = 0.05; // Threshold below which linear movement is stopped.
-    const double angular_threshold = 0.05; // Threshold below which rotational movement is stopped.
+    const double angular_threshold = 0.1; // Threshold below which rotational movement is stopped.
 
     geometry_msgs::Twist movement_msg;
 
