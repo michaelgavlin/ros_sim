@@ -9,9 +9,13 @@
 // Global publisher for sending calculated pose information.
 ros::Publisher pub;
 
-// Target position constants.
-const double target_x = 2.0;
-const double target_y = 1.0;
+// Global variables for target position.
+double target_x;
+double target_y;
+
+// // Target position constants.
+// const double target_x = 2.0;
+// const double target_y = 1.0;
 
 // Variables to store calculated angle and distance to target.
 double angle_to_target_value;
@@ -66,15 +70,27 @@ void odomCallback(const nav_msgs::Odometry::ConstPtr& msg) {
     pub.publish(msg_);
 }
 
+void userInputCallback(const my_pckg::PoseSimple& msg) {
+    ROS_INFO("Translated gps to cartesian Linear relative to Sarona X: %f, Linear X:: %f", msg.linear_x, msg.linear_y);
+    target_x = msg.linear_x;
+    target_y = msg.linear_y;
+    // publish_movement(msg.linear_x, msg.angular_z); // Call to publish movement commands based on received msg.
+}
+
 /**
  * Main function to initialize the ROS node and set up the publisher and subscriber.
  */
 int main(int argc, char **argv) {
     ros::init(argc, argv, "odom_subscriber");
     ros::NodeHandle n;
+
+    // Initialize target position with default values (optional)
+    target_x = 2.0;
+    target_y = 1.0;
      
     pub = n.advertise<my_pckg::PoseSimple>("/controller", 10);
     ros::Subscriber sub = n.subscribe("/odom", 1000, odomCallback);
+    ros::Subscriber user_subscriber = n.subscribe("/target_destination", 1000, userInputCallback);
 
     ros::spin(); // Keep the node running and listening for callbacks.
 

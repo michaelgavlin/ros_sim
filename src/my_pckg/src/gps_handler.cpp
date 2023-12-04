@@ -21,28 +21,45 @@ public:
 
     void convert() {
 
-        std::cout << "Sarona geographic location (origin):  32.072734 , 34.787465\n";
-        std::cout << "for debug ref:                        32.072758 , 34.787702\n";
-        std::cout << "-----------------------------------------------------------\n";
-        
-        double latitude, longitude;
-        std::cout << "Enter latitude: ";
-        std::cin >> latitude;
-        std::cout << "Enter longitude: ";
-        std::cin >> longitude;
-
+        int inputType;
         double x, y;
-        int zone;
-        bool northp;
+        std::cout << "-----------------------------------------------------------\n";
+        std::cout << "Enter 1 for GPS coordinates, 2 for Cartesian coordinates:\n";
+        std::cin >> inputType;
 
-        // Convert the received geolocation to UTM coordinates
-        GeographicLib::UTMUPS::Forward(latitude, longitude, zone, northp, x, y);
+        if (inputType == 1) { // GPS Coordinates
+            std::cout << "Sarona geographic location (origin):  32.072734 , 34.787465\n";
+            std::cout << "for debug ref:                        32.072758 , 34.787702\n";
+            std::cout << "----\n";
+            
+            double latitude, longitude;
+            std::cout << "Enter latitude: ";
+            std::cin >> latitude;
+            std::cout << "Enter longitude: ";
+            std::cin >> longitude;
 
-        // Translate based on the origin
-        x -= originX;
-        y -= originY;
+            int zone;
+            bool northp;
 
-        std::cout << "Converted Cartesian coordinates: x = " << x << ", y = " << y << std::endl;
+            // Convert the received geolocation to UTM coordinates
+            GeographicLib::UTMUPS::Forward(latitude, longitude, zone, northp, x, y);
+
+            // Translate based on the origin
+            x -= originX;
+            y -= originY;
+
+            std::cout << "Converted Cartesian coordinates: x = " << x << ", y = " << y << std::endl;
+        } else if (inputType == 2) { // Cartesian Coordinates
+            std::cout << "Enter Cartesian x: ";
+            std::cin >> x;
+            std::cout << "Enter Cartesian y: ";
+            std::cin >> y;
+        // Assuming Cartesian coordinates are already relative to the origin
+        
+        } else {
+            std::cout << "Invalid input. Please enter 1 for GPS or 2 for Cartesian coordinates.\n";
+            return;
+        }
 
         // publish requested coordination in cartesian relative to Sarona
         my_pckg::PoseSimple msg_;
