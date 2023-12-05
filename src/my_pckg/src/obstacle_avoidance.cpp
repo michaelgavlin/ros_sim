@@ -48,13 +48,13 @@ void controllerCallback(const my_pckg::PoseSimple& msg) {
     // Modify the message based on the direction parameter
     my_pckg::PoseSimple modified_msg = msg;
 
-    // logic function - modify angle 
+    // main logic function - modify angle 
     float threashold = 0.5;
     if(global_min_distance < threashold) {
     // modified_msg.angular_z += (direction_parameter * 1/ (global_min_distance * proportion));
     float mag = 1;
-    modified_msg.angular_z += - direction_parameter * (1 + threashold - global_min_distance) * 60 * 3.14 / 180 * mag;
-    modified_msg.linear_x = 0.1;
+    modified_msg.angular_z += - direction_parameter * (1 + threashold - global_min_distance) * 45 * 3.14 / 180 * mag; // point robot out of collision path
+    modified_msg.linear_x *= (threashold - global_min_distance); // slow down to avoid accident
     }
 
     // Publish the modified message
