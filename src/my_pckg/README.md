@@ -1,6 +1,8 @@
 # readme
 
-# Blue White homework
+# Project overview
+
+![Image Alt Text](https://github.com/michaelgavlin/ros_sim/blob/master/src/my_pckg/report/ros_sim.drawio.png)
 
 ## 1. Installation
 
