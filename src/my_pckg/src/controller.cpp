@@ -60,7 +60,7 @@ void controllerCallback(const my_pckg::PoseSimple& msg) {
 
 
 int main(int argc, char **argv) {
-    ros::init(argc, argv, "state_control_node"); // Initialize the ROS node.
+    ros::init(argc, argv, "controller_node"); // Initialize the ROS node.
     ros::NodeHandle n;
 
     // Subscribe to the /controller topic and advertise on /cmd_vel.

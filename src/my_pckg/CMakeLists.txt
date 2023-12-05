@@ -47,8 +47,8 @@ ${GeographicLib_INCLUDE_DIRS}
 add_executable(state_status_node src/state_status.cpp)
 target_link_libraries(state_status_node ${catkin_LIBRARIES})
 
-add_executable(state_control_node src/state_control.cpp)
-target_link_libraries(state_control_node ${catkin_LIBRARIES})
+add_executable(controller_node src/controller.cpp)
+target_link_libraries(controller_node ${catkin_LIBRARIES})
 
 add_executable(gps_handler_node src/gps_handler.cpp)
 target_link_libraries(gps_handler_node ${catkin_LIBRARIES} ${GeographicLib_LIBRARIES})
