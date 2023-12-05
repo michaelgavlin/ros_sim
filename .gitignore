@@ -1,0 +1,9 @@
+# Ignore everything
+*
+
+# But include the my_pckg directory
+!/src/
+!/src/my_pckg/
+
+# And include everything under my_pckg
+!/src/my_pckg/**
