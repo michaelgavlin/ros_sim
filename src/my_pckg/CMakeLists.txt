@@ -58,3 +58,6 @@ target_link_libraries(user_interface_node ${catkin_LIBRARIES} ${GeographicLib_LI
 
 add_executable(location_scaler_node src/location_scaler.cpp)
 target_link_libraries(location_scaler_node ${catkin_LIBRARIES})
+
+add_executable(obstacle_avoidance_node src/obstacle_avoidance.cpp)
+target_link_libraries(obstacle_avoidance_node ${catkin_LIBRARIES})
