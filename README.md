@@ -57,17 +57,14 @@ Copy launch file
 - `cp meshes/turtlebot3_empty_world_michael.launch ~/catkin_ws/src/turtlebot3_simulations/turtlebot3_gazebo/launch`
 
 ## 2. Launch
+- Launch main logic and gps interface:
+`roslaunch my_pckg launch_main.launch`
 
-- Run Gazebo enviroment:
+- Launch previous plus Gazebo empty world:
+`roslaunch my_pckg launch_main_and_empty_world.launch`
 
- with my robot:
+- Launch user interface:
+`roslaunch my_pckg launch_user_interface.launch`
 
-`roslaunch turtlebot3_gazebo turtlebot3_empty_world_michael.launch`
+- Launch GPS gui - use provided python files.
 
-Gazebo enviroment with basic robot:
-
-`roslaunch turtlebot3_gazebo turtlebot3_empty_world_michael.launch`
-
-- Launch `roslaunch my_pckg launch_file.launch`
-- run user inteface node (optional, for debgging). `rosrun my_pckg user_interface_node`
-- Run provided Python GUI.
