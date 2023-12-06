@@ -1,0 +1,7 @@
+<launch>
+    <rosparam param="/rosout_disable_topics_generation">true</rosparam>
+
+    <node name="user_interface_node" pkg="my_pckg" type="user_interface_node" output="screen">
+    </node>
+
+</launch>

@@ -1,0 +1,27 @@
+<launch>
+    <!-- Existing rosparam for disabling topics generation -->
+    <rosparam param="/rosout_disable_topics_generation">true</rosparam>
+
+    <!-- Node definitions for your package 'my_pckg' -->
+    <node name="gps_handler_node" pkg="my_pckg" type="gps_handler_node" output="screen">
+        <param name="log_level" value="error"/>
+    </node>
+
+    <node name="controller_node" pkg="my_pckg" type="controller_node" output="screen">
+        <param name="log_level" value="error"/>
+    </node>
+
+    <node name="state_status_node" pkg="my_pckg" type="state_status_node" output="screen">
+        <param name="log_level" value="error"/>
+    </node>
+
+    <node name="location_scaler_node" pkg="my_pckg" type="location_scaler_node" output="screen">
+        <param name="log_level" value="error"/>
+    </node>
+
+    <node name="obstacle_avoidance_node" pkg="my_pckg" type="obstacle_avoidance_node" output="screen">
+        <param name="log_level" value="error"/>
+    </node>
+
+    <include file="$(find turtlebot3_gazebo)/launch/turtlebot3_empty_world_michael.launch"/>
+</launch>
